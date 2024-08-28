@@ -215,9 +215,7 @@ data class MessagesTestVector(
         val applicationData = Random.nextBytes(64)
         val applicationContent = FramedContent.createMember(ApplicationData(applicationData), groupContext, leafIndex)
         val applicationPublicMessage =
-          MlsMessage(
-            ProtocolVersion.MLS_1_0,
-            WireFormat.MlsPublicMessage,
+          MlsMessage.public(
             PublicMessage(
               applicationContent,
               applicationContent.sign(WireFormat.MlsPublicMessage, groupContext, signatureKey).bind(),
@@ -233,9 +231,7 @@ data class MessagesTestVector(
             leafIndex,
           )
         val proposalPublicMessage =
-          MlsMessage(
-            ProtocolVersion.MLS_1_0,
-            WireFormat.MlsPublicMessage,
+          MlsMessage.public(
             PublicMessage(
               proposalContent,
               proposalContent.sign(WireFormat.MlsPublicMessage, groupContext, signatureKey).bind(),
@@ -246,9 +242,7 @@ data class MessagesTestVector(
 
         val commitContent = FramedContent.createMember(commit, groupContext, leafIndex)
         val commitPublicMessage =
-          MlsMessage(
-            ProtocolVersion.MLS_1_0,
-            WireFormat.MlsPublicMessage,
+          MlsMessage.public(
             PublicMessage(
               commitContent,
               commitContent.sign(WireFormat.MlsPublicMessage, groupContext, signatureKey).bind(),
