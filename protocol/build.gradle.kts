@@ -31,21 +31,25 @@ val vertxVersion: String by project
 
 dependencies {
   // Kotlin Standard Library
-  implementation(kotlin("stdlib-jdk8"))
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+  implementation(kotlin("stdlib-jdk8")) // KMP-ready
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion") // KMP-ready
 
   // Arrow
-  api(platform("io.arrow-kt:arrow-stack:$arrowVersion"))
-  api("io.arrow-kt:arrow-core")
+  api(platform("io.arrow-kt:arrow-stack:$arrowVersion")) // KMP-ready
+  api("io.arrow-kt:arrow-core") // KMP-ready
 
   // Codec
   api(project(":codec"))
 
   // Crypto
-  implementation("org.bouncycastle:bcprov-jdk18on:$bouncycastleVersion")
-  implementation("org.bouncycastle:bcpkix-jdk18on:$bouncycastleVersion")
+  implementation("org.bouncycastle:bcprov-jdk18on:$bouncycastleVersion") // TODO: Replace with KMP Library
+  implementation("org.bouncycastle:bcpkix-jdk18on:$bouncycastleVersion") // TODO: Replace with KMP Library
+
+  // KMP
+  implementation("dev.whyoleg.cryptography:cryptography-core:0.3.1") // Replaces org.bouncycastle:bcprov-jdk18on
 
   // Test Dependencies
+  // Tests don't really need to be KMP ready...
   testImplementation(kotlin("test"))
 
   testImplementation(platform("io.kotest:kotest-bom:$kotestVersion"))
